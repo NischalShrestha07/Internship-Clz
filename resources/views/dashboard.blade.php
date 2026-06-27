@@ -1,5 +1,5 @@
-<x-layouts.app>
+@extends('components.layouts.app')
 
-    @livewire('dashboard-summary')
-
-</x-layouts.app>
+@section('content')
+    @include('dashboard-summary')
+@endsection

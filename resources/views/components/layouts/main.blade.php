@@ -10,16 +10,13 @@
 </head>
 
 <body class="bg-gray-50 text-gray-900">
-    <!-- Navbar -->
-    @include('livewire.main.navbar')
+    @include('partials.main-navbar')
 
-    <!-- Main Content -->
     <main>
-        {{ $slot }}
+        @yield('content')
     </main>
 
-    <!-- Footer -->
-    @include('livewire.main.footer')
+    @include('partials.main-footer')
 </body>
 
 </html>

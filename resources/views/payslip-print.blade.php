@@ -199,7 +199,7 @@
                     </thead>
                     <tbody>
                         @php
-                        $salaryBreakdown = app('App\Livewire\Payroll\MyPayslips')->getSalaryBreakdown($payslip);
+                        $salaryBreakdown = \App\Http\Controllers\Payroll\MyPayslipController::getSalaryBreakdown($payslip);
                         @endphp
                         @foreach($salaryBreakdown as $earning)
                         <tr>
@@ -235,7 +235,7 @@
                     </thead>
                     <tbody>
                         @php
-                        $deductionBreakdown = app('App\Livewire\Payroll\MyPayslips')->getDeductionBreakdown($payslip);
+                        $deductionBreakdown = \App\Http\Controllers\Payroll\MyPayslipController::getDeductionBreakdown($payslip);
                         @endphp
                         @foreach($deductionBreakdown as $deduction)
                         <tr>

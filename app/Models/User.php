@@ -9,28 +9,12 @@ use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
 
     use HasFactory, Notifiable, HasRoles;
-
-    //    public function canAccessPanel(Panel $panel): bool
-    //     {
-    //         return $this->hasRole('Admin');
-    //     }
-    public function canAccessPanel(\Filament\Panel $panel): bool
-    {
-        \Log::info('canAccessPanel check', [
-            'user_id' => $this->id,
-            'roles' => $this->roles->pluck('name')->toArray(),
-            'panel_id' => $panel->getId(),
-        ]);
-        return $this->hasAnyRole(['Admin', 'Employee']);
-    }
 
     /**
      * The attributes that are mass assignable.

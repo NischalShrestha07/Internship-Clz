@@ -1,11 +1,8 @@
 @import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
-
 
 @source '../views';
+@source '../js';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
-@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -38,7 +35,6 @@
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
@@ -48,27 +44,9 @@
     }
 }
 
-[data-flux-field]:not(ui-radio, ui-checkbox) {
-    @apply grid gap-2;
-}
-
-[data-flux-label] {
-    @apply !mb-0 !leading-tight;
-}
-
-input:focus[data-flux-control],
-textarea:focus[data-flux-control],
-select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
-}
-
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
 .shadow-by-force {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .date-input {
     color-scheme: light;
@@ -90,4 +68,23 @@ select:focus[data-flux-control] {
 
 .dark .select-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+#sidebar.collapsed {
+    width: 64px !important;
+}
+#sidebar.collapsed .truncate,
+#sidebar.collapsed .sidebar-chevron,
+#sidebar.collapsed [data-submenu] {
+    display: none;
+}
+#sidebar.collapsed .sidebar-link,
+#sidebar.collapsed .sidebar-menu-btn {
+    justify-content: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+#sidebar.collapsed #sidebar-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }

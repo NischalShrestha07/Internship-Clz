@@ -72,14 +72,18 @@
                                         <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                             {{ $activity['action'] }}
                                         </p>
-                                        @if (isset($activity['duration']))
+                                        @if (isset($activity['duration']) && is_numeric($activity['duration']))
                                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                            Duration: {{ number_format((float) $activity['duration'], 2) }} mins
+                                            Duration: {{ $activity['duration'] }} mins
+                                        </p>
+                                        @elseif (isset($activity['duration']))
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                            Duration: {{ $activity['duration'] }}
                                         </p>
                                         @endif
                                     </div>
                                     <div class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                        {{ \Carbon\Carbon::parse($activity['time'])->format('d M Y, h:i A') }}
+                                        {{ \Carbon\Carbon::parse($activity['time'])->format('d M Y, h:i:s A') }}
                                     </div>
                                 </div>
                             </div>

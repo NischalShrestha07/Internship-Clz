@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Livewire\Auth\Login;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -30,14 +28,12 @@ class AuthenticationTest extends TestCase
 
         $user->assignRole('Employee');
 
-        $response = Livewire::test(Login::class)
-            ->set('email', $user->email)
-            ->set('password', 'password')
-            ->call('login');
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
 
-        $response
-            ->assertHasNoErrors()
-            ->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('dashboard', absolute: false));
 
         $this->assertAuthenticated();
     }
@@ -46,12 +42,12 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = Livewire::test(Login::class)
-            ->set('email', $user->email)
-            ->set('password', 'wrong-password')
-            ->call('login');
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
 
-        $response->assertHasErrors('email');
+        $response->assertSessionHasErrors('email');
 
         $this->assertGuest();
     }
